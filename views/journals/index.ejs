@@ -1,0 +1,60 @@
+<div class="container py-5">
+  <h1 class="mb-4">All Journals</h1>
+
+  <!-- SEARCH + FILTER -->
+  <form method="GET" action="/journals" class="row mb-4">
+
+    <div class="col-md-5 mb-2">
+      <input 
+        type="text" 
+        name="search" 
+        class="form-control" 
+        placeholder="Search by title or author"
+        value="<%= search || '' %>"
+      >
+    </div>
+
+    <div class="col-md-4 mb-2">
+      <select name="category" class="form-control">
+        <option value="">All Categories</option>
+        <% categories.forEach(cat => { %>
+          <option value="<%= cat.id %>" <%= category == cat.id ? 'selected' : '' %>>
+            <%= cat.name %>
+          </option>
+        <% }) %>
+      </select>
+    </div>
+
+    <div class="col-md-3 mb-2">
+      <button type="submit" class="btn btn-primary w-100">Search</button>
+    </div>
+
+  </form>
+
+  <!-- JOURNAL CARDS -->
+  <div class="row">
+    <% journals.forEach(journal => { %>
+      <div class="col-md-4 mb-4">
+        <div class="card h-100 shadow-sm">
+          <div class="card-body">
+            <h5 class="card-title"><%= journal.title %></h5>
+            <p class="card-text"><strong>Author:</strong> <%= journal.author %></p>
+            <p class="card-text"><strong>Category:</strong> <%= journal.category_name %></p>
+            <p class="card-text"><strong>Year:</strong> <%= journal.year %></p>
+
+            <span class="badge bg-<%= journal.access_type === 'premium' ? 'danger' : 'success' %>">
+              <%= journal.access_type %>
+            </span>
+          </div>
+
+          <div class="card-footer text-center">
+            <a href="/journals/<%= journal.id %>" class="btn btn-outline-primary btn-sm">
+              View
+            </a>
+          </div>
+        </div>
+      </div>
+    <% }) %>
+  </div>
+
+</div>

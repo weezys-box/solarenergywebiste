@@ -1,0 +1,63 @@
+<div class="container py-5">
+
+  <!-- TITLE -->
+  <h1 class="mb-3"><%= journal.title %></h1>
+
+  <!-- META INFO -->
+  <div class="mb-4 text-muted">
+    <span><strong>Author:</strong> <%= journal.author %></span> |
+    <span><strong>Category:</strong> <%= journal.category_name || 'Uncategorized' %></span> |
+    <span><strong>Year:</strong> <%= journal.year %></span>
+  </div>
+
+  <!-- ACCESS BADGE -->
+  <div class="mb-4">
+    <span class="badge bg-<%= journal.access_type === 'premium' ? 'danger' : 'success' %>">
+      <%= journal.access_type.toUpperCase() %>
+    </span>
+  </div>
+
+  <!-- ABSTRACT -->
+  <div class="card p-4 mb-4 shadow-sm">
+    <h4>Abstract</h4>
+    <p class="text-muted"><%= journal.abstract %></p>
+  </div>
+
+  <!-- KEYWORDS -->
+  <div class="mb-4">
+    <h5>Keywords</h5>
+    <p class="text-muted"><%= journal.keywords %></p>
+  </div>
+
+  <!-- DOWNLOAD / ACCESS -->
+  <div class="card p-4 shadow-sm text-center">
+
+    <% if (journal.access_type === 'free') { %>
+
+      <a href="<%= journal.file_path %>" target="_blank" class="btn btn-primary btn-lg">
+        📄 View / Download PDF
+      </a>
+
+    <% } else { %>
+
+      <% if (user && user.membership_type === 'premium') { %>
+
+        <a href="<%= journal.file_path %>" target="_blank" class="btn btn-primary btn-lg">
+          📄 View / Download PDF
+        </a>
+
+      <% } else { %>
+
+        <p class="text-danger">This is a premium journal. Upgrade your membership to access it.</p>
+
+        <a href="/membership" class="btn btn-warning">
+          Upgrade Membership
+        </a>
+
+      <% } %>
+
+    <% } %>
+
+  </div>
+
+</div>

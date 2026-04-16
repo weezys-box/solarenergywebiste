@@ -1,0 +1,39 @@
+<section style="padding: 40px;">
+  <h1>Upload Journal</h1>
+
+  <% if (error_msg.length > 0) { %>
+    <p style="color:red;"><%= error_msg %></p>
+  <% } %>
+
+  <% if (success_msg.length > 0) { %>
+    <p style="color:green;"><%= success_msg %></p>
+  <% } %>
+
+  <form action="/admin/journals" method="POST" enctype="multipart/form-data">
+    <input type="text" name="title" placeholder="Journal Title" required style="display:block; margin-bottom:10px; padding:10px; width:400px;">
+
+    <textarea name="abstract" placeholder="Abstract" required style="display:block; margin-bottom:10px; padding:10px; width:400px; height:120px;"></textarea>
+
+    <input type="text" name="author" placeholder="Author Name" required style="display:block; margin-bottom:10px; padding:10px; width:400px;">
+
+    <select name="category_id" required style="display:block; margin-bottom:10px; padding:10px; width:420px;">
+      <option value="">Select Category</option>
+      <% categories.forEach(category => { %>
+        <option value="<%= category.id %>"><%= category.name %></option>
+      <% }) %>
+    </select>
+
+    <input type="number" name="year" placeholder="Publication Year" required style="display:block; margin-bottom:10px; padding:10px; width:400px;">
+
+    <input type="text" name="keywords" placeholder="Keywords (comma separated)" style="display:block; margin-bottom:10px; padding:10px; width:400px;">
+
+    <select name="access_type" required style="display:block; margin-bottom:10px; padding:10px; width:420px;">
+      <option value="free">Free</option>
+      <option value="premium">Premium</option>
+    </select>
+
+    <input type="file" name="journal_file" accept="application/pdf" required style="display:block; margin-bottom:10px;">
+
+    <button type="submit">Upload Journal</button>
+  </form>
+</section>
