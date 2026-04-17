@@ -435,3 +435,44 @@ img {
 .btn-success:hover {
   background-color: #14532d;
 }
+
+.card hr {
+  opacity: 0.1;
+}
+
+.timeline {
+  position: relative;
+  margin-left: 50px;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 150px;
+  top: 0;
+  width: 3px;
+  height: 100%;
+  background: #198754;
+}
+
+.timeline-item {
+  position: relative;
+}
+
+.timeline-year {
+  width: 120px;
+}
+
+.timeline-dot {
+  width: 14px;
+  height: 14px;
+  background: #198754;
+  border-radius: 50%;
+  position: relative;
+  left: 144px;
+  top: 10px;
+}
+
+.timeline-content {
+  flex: 1;
+}

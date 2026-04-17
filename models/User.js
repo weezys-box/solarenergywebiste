@@ -2,19 +2,22 @@ const db = require('../config/db');
 
 const User = {
   create: (userData, callback) => {
-    const sql = `
-      INSERT INTO users (full_name, email, password, role, membership_type, membership_status)
-      VALUES (?, ?, ?, ?, ?, ?)
-    `;
-    db.query(sql, [
-      userData.full_name,
-      userData.email,
-      userData.password,
-      userData.role || 'member',
-      userData.membership_type || 'free',
-      userData.membership_status || 'active'
-    ], callback);
-  },
+  const sql = `
+    INSERT INTO users 
+    (full_name, email, password, role, membership_type, membership_status, membership_category)
+    VALUES (?, ?, ?, ?, ?, ?, ?)
+  `;
+
+  db.query(sql, [
+    userData.full_name,
+    userData.email,
+    userData.password,
+    userData.role || 'member',
+    userData.membership_type || 'free',
+    userData.membership_status || 'inactive',
+    userData.membership_category
+  ], callback);
+},
 
   findByEmail: (email, callback) => {
     const sql = 'SELECT * FROM users WHERE email = ?';

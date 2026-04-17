@@ -1,0 +1,32 @@
+<div class="container py-5">
+
+  <h2 class="mb-4">Manage Presidents</h2>
+
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Tenure</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% presidents.forEach(p => { %>
+        <tr>
+          <td><%= p.full_name %></td>
+          <td><%= p.tenure_start %> - <%= p.tenure_end %></td>
+
+          <td>
+            <a href="/admin/presidents/edit/<%= p.id %>" class="btn btn-warning btn-sm">Edit</a>
+
+            <form action="/admin/presidents/delete/<%= p.id %>" method="POST" style="display:inline;">
+              <button class="btn btn-danger btn-sm">Delete</button>
+            </form>
+          </td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+
+</div>

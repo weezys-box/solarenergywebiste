@@ -1,14 +1,47 @@
 <div class="container py-5">
+
   <h1 class="mb-4">Dashboard</h1>
 
   <div class="card p-4 shadow-sm">
-    <h4>Welcome, <%= user.full_name %></h4>
-    <p>Membership: <strong><%= user.membership_type %></strong></p>
 
-    <% if (user.membership_type !== 'premium') { %>
-      <a href="/upgrade" class="btn btn-warning">Upgrade to Premium</a>
+    <h4 class="mb-3">Welcome, <%= user.full_name %></h4>
+
+    <hr>
+
+    <h5 class="mb-3 text-success">Membership Information</h5>
+
+    <p>
+      <strong>Category:</strong> 
+      <%= user.membership_category || 'Not Selected' %>
+    </p>
+
+    <p>
+      <strong>Status:</strong> 
+      <span class="badge bg-<%= user.membership_status === 'active' ? 'success' : 'danger' %>">
+        <%= user.membership_status || 'inactive' %>
+      </span>
+    </p>
+
+    <p>
+      <strong>Expiry Date:</strong> 
+      <%= user.membership_expiry 
+          ? new Date(user.membership_expiry).toDateString() 
+          : 'N/A' %>
+    </p>
+
+    <hr>
+
+    <!-- ACTION BUTTON -->
+    <% if (user.membership_status !== 'active') { %>
+      <a href="/membership/pay" class="btn btn-warning">
+        Pay Membership Dues
+      </a>
     <% } else { %>
-      <span class="badge bg-success">Premium Member</span>
+      <div class="alert alert-success mt-3">
+        Your membership is active
+      </div>
     <% } %>
+
   </div>
+
 </div>

@@ -11,7 +11,7 @@ exports.showLogin = (req, res) => {
 
 exports.registerUser = async (req, res) => {
   try {
-    const { full_name, email, password, confirm_password } = req.body;
+    const { full_name, email, password, confirm_password, membership_category } = req.body;
 
     if (!full_name || !email || !password || !confirm_password) {
       req.flash('error_msg', 'All fields are required');
@@ -38,11 +38,11 @@ exports.registerUser = async (req, res) => {
       const hashedPassword = await bcrypt.hash(password, 10);
 
       const newUser = {
-        full_name,
-        email,
-        password: hashedPassword
-      };
-
+  full_name,
+  email,
+  password: hashedPassword,
+  membership_category
+};
       User.create(newUser, (err, result) => {
         if (err) {
           console.error(err);
@@ -92,13 +92,14 @@ exports.loginUser = (req, res) => {
     }
 
     req.session.user = {
-      id: user.id,
-      full_name: user.full_name,
-      email: user.email,
-      role: user.role,
-      membership_type: user.membership_type,
-      membership_status: user.membership_status
-    };
+  id: user.id,
+  full_name: user.full_name,
+  email: user.email,
+  role: user.role,
+  membership_status: user.membership_status,
+  membership_category: user.membership_category,
+  membership_expiry: user.membership_expiry
+};
 
     req.flash('success_msg', 'Login successful');
 

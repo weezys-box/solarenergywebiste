@@ -1,0 +1,45 @@
+<div class="container py-5">
+
+  <h2 class="text-center mb-5 fw-bold">Past Presidents</h2>
+
+  <div class="timeline">
+
+    <% presidents.forEach(p => { %>
+
+      <div class="timeline-item d-flex mb-5">
+
+        <!-- Year -->
+        <div class="timeline-year text-end pe-4">
+          <h5 class="fw-bold mb-0">
+            <%= p.tenure_start %> – <%= p.tenure_end %>
+          </h5>
+        </div>
+
+        <!-- Dot -->
+        <div class="timeline-dot"></div>
+
+        <!-- Content -->
+        <div class="timeline-content ps-4">
+
+          <div class="card shadow-sm p-3 d-flex flex-row align-items-center">
+
+            <img src="<%= p.image %>" 
+                 class="rounded-circle me-3"
+                 style="width: 80px; height: 80px; object-fit: cover;">
+
+            <div>
+              <h5 class="fw-bold mb-1"><%= p.full_name %></h5>
+              <small class="text-muted">President</small>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    <% }) %>
+
+  </div>
+
+</div>

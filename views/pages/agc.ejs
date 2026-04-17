@@ -1,0 +1,27 @@
+<div class="container py-5">
+
+  <h2 class="mb-4 text-center">Annual General Conference (AGC)</h2>
+
+  <form action="/agc/register" method="POST" class="card p-4 shadow-sm">
+<label>Full Name</label>
+    <input type="text" name="full_name" class="form-control"
+  value="<%= user ? user.full_name : '' %>" required>
+<label>Email</label>
+<input type="email" name="email" class="form-control"
+  value="<%= user ? user.email : '' %>" required>
+
+    <div class="mb-3">
+      <label>Category</label>
+      <select name="category" class="form-control" required>
+        <option value="">Select Category</option>
+        <option value="Member">Member</option>
+        <option value="Non-Member">Non-Member</option>
+        <option value="Student">Student</option>
+      </select>
+    </div>
+
+    <button class="btn btn-success">Register & Proceed to Payment</button>
+
+  </form>
+
+</div>

@@ -1,0 +1,19 @@
+<div class="container py-5">
+
+  <h2>Add Past President</h2>
+
+  <form action="/admin/presidents" method="POST" enctype="multipart/form-data">
+
+    <input type="text" name="full_name" class="form-control mb-3" placeholder="Full Name" required>
+
+    <input type="number" name="tenure_start" class="form-control mb-3" placeholder="Start Year" required>
+
+    <input type="number" name="tenure_end" class="form-control mb-3" placeholder="End Year" required>
+
+    <input type="file" name="image" class="form-control mb-3">
+
+    <button class="btn btn-success">Add President</button>
+
+  </form>
+
+</div>

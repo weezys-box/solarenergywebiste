@@ -1,0 +1,20 @@
+<div class="container py-5">
+
+  <h2>Edit President</h2>
+
+  <form action="/admin/presidents/edit/<%= president.id %>" method="POST">
+
+    <input type="text" name="full_name" class="form-control mb-3"
+      value="<%= president.full_name %>" required>
+
+    <input type="number" name="tenure_start" class="form-control mb-3"
+      value="<%= president.tenure_start %>" required>
+
+    <input type="number" name="tenure_end" class="form-control mb-3"
+      value="<%= president.tenure_end %>" required>
+
+    <button class="btn btn-success">Update</button>
+
+  </form>
+
+</div>

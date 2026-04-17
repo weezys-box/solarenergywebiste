@@ -1,0 +1,30 @@
+<div class="container py-5">
+
+  <h2 class="mb-4">AGC Registrations</h2>
+
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Category</th>
+        <th>Status</th>
+        <th>Date</th>
+      </tr>
+    </thead>
+    <tbody>
+
+      <% registrations.forEach(r => { %>
+        <tr>
+          <td><%= r.full_name %></td>
+          <td><%= r.email %></td>
+          <td><%= r.category %></td>
+          <td><%= r.payment_status %></td>
+          <td><%= new Date(r.created_at).toDateString() %></td>
+        </tr>
+      <% }) %>
+
+    </tbody>
+  </table>
+
+</div>
