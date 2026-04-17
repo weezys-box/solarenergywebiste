@@ -1,0 +1,30 @@
+<div class="container py-5" style="max-width: 800px;">
+
+  <!-- Title -->
+  <h1 class="fw-bold mb-3"><%= item.title %></h1>
+
+  <!-- Date -->
+  <p class="text-muted mb-4">
+    <%= item.created_at 
+        ? new Date(item.created_at).toDateString() 
+        : '' %>
+  </p>
+
+  <!-- Image -->
+  <% if (item.image) { %>
+    <img src="<%= item.image %>" class="img-fluid rounded mb-4">
+  <% } %>
+
+  <!-- Content -->
+  <div class="news-content">
+    <% item.content.split('\n').forEach(p => { %>
+  <p><%= p %></p>
+<% }) %>
+  </div>
+
+  <!-- Back Button -->
+  <a href="/news-events" class="btn btn-outline-secondary mt-4">
+    ← Back to News
+  </a>
+
+</div>

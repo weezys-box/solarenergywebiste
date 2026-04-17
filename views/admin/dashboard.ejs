@@ -1,10 +1,74 @@
-<section style="padding: 40px;">
-  <h1>Admin Dashboard</h1>
-  <p>Welcome Admin, <%= user.full_name %></p>
+<section class="py-5 bg-light" style="min-height: 80vh;">
 
-  <ul>
-    <li><a href="/admin/journals">Manage Journals</a></li>
-    <li><a href="/admin/journals/new">Upload Journal</a></li>
-    <li><a href="/logout">Logout</a></li>
-  </ul>
+  <div class="container">
+
+    <!-- Header -->
+    <div class="mb-5 text-center">
+      <h1 class="fw-bold">Admin Dashboard</h1>
+      <p class="text-muted">Welcome, <strong><%= user.full_name %></strong></p>
+    </div>
+
+    <!-- Cards -->
+    <div class="row g-4">
+
+      <!-- Journals -->
+      <div class="col-md-4">
+        <div class="card shadow-sm h-100 text-center p-4 dashboard-card">
+
+          <h5 class="fw-bold mb-3">📚 Journals</h5>
+          <p class="text-muted">Manage and view all journals.</p>
+
+          <a href="/admin/journals" class="btn btn-outline-success mt-3">
+            Manage Journals
+          </a>
+
+        </div>
+      </div>
+
+      <!-- Upload Journal -->
+      <div class="col-md-4">
+        <div class="card shadow-sm h-100 text-center p-4 dashboard-card">
+
+          <h5 class="fw-bold mb-3">⬆️ Upload Journal</h5>
+          <p class="text-muted">Add new research publications.</p>
+
+          <a href="/admin/journals/new" class="btn btn-outline-success mt-3">
+            Upload
+          </a>
+
+        </div>
+      </div>
+
+      <!-- News -->
+      <div class="col-md-4">
+        <div class="card shadow-sm h-100 text-center p-4 dashboard-card">
+
+          <h5 class="fw-bold mb-3">📰 News & Events</h5>
+          <p class="text-muted">Create, edit and delete news posts.</p>
+
+          <a href="/admin/news" class="btn btn-success mt-3">
+            Manage News
+          </a>
+
+        </div>
+      </div>
+
+      <!-- Logout -->
+      <div class="col-md-4">
+        <div class="card shadow-sm h-100 text-center p-4 dashboard-card">
+
+          <h5 class="fw-bold mb-3">🚪 Logout</h5>
+          <p class="text-muted">Sign out of admin panel.</p>
+
+          <a href="/logout" class="btn btn-danger mt-3">
+            Logout
+          </a>
+
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
 </section>
