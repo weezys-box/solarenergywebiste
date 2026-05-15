@@ -1,4 +1,94 @@
-<section style="padding: 40px;">
-  <h1>Contact Us</h1>
-  <p>You can reach us for inquiries, membership support, and journal access questions.</p>
+<!-- HERO -->
+<section class="section text-white text-center" style="background-color: var(--primary-green);">
+  <div class="container">
+    <h1 class="fw-bold">Contact Us</h1>
+    <p class="lead">We’d love to hear from you</p>
+  </div>
+</section>
+
+<!-- CONTACT SECTION -->
+<section class="section">
+  <div class="container">
+
+    <div class="row g-5">
+
+      <!-- CONTACT INFO -->
+      <div class="col-md-5">
+
+        <h4 class="fw-bold mb-3">Get in Touch</h4>
+
+        <p class="text-muted">
+          For inquiries, membership support, or partnerships, reach out to us using the details below.
+        </p>
+
+        <ul class="list-unstyled mt-4">
+          <li class="mb-3">
+            📍 <strong>Address:</strong><br>
+            Abuja, Nigeria
+          </li>
+
+          <li class="mb-3">
+            📧 <strong>Email:</strong><br>
+            info@sesn.org
+          </li>
+
+          <li class="mb-3">
+            📞 <strong>Phone:</strong><br>
+            +234 XXX XXX XXXX
+          </li>
+        </ul>
+
+      </div>
+
+      <!-- CONTACT FORM -->
+      <div class="col-md-7">
+
+        <div class="card shadow-sm p-4">
+
+          <h5 class="fw-bold mb-3">Send a Message</h5>
+
+          <form action="/contact" method="POST">
+
+            <div class="mb-3">
+              <input type="text" name="name" class="form-control" placeholder="Your Name" required>
+            </div>
+
+            <div class="mb-3">
+              <input type="email" name="email" class="form-control" placeholder="Your Email" required>
+            </div>
+
+            <div class="mb-3">
+              <textarea name="message" class="form-control" rows="5" placeholder="Your Message" required></textarea>
+            </div>
+
+            <button class="btn btn-success w-100">
+              Send Message
+            </button>
+
+          </form>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<!-- OPTIONAL MAP -->
+<section class="section bg-light">
+  <div class="container">
+
+    <h4 class="text-center mb-4">Our Location</h4>
+
+    <div class="ratio ratio-16x9">
+      <iframe 
+        src="https://maps.google.com/maps?q=Abuja&t=&z=13&ie=UTF8&iwloc=&output=embed"
+        style="border:0;"
+        allowfullscreen>
+      </iframe>
+    </div>
+
+  </div>
 </section>

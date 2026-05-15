@@ -32,16 +32,39 @@
     <hr>
 
     <!-- ACTION BUTTON -->
-    <% if (user.membership_status !== 'active') { %>
-      <a href="/membership/pay" class="btn btn-warning">
-        Pay Membership Dues
-      </a>
-    <% } else { %>
-      <div class="alert alert-success mt-3">
-        Your membership is active
-      </div>
-    <% } %>
+   <hr>
 
+<h5 class="mb-3 text-success">Application Status</h5>
+
+<% if (user.application_status === 'pending') { %>
+
+  <div class="alert alert-warning">
+    Your application is under review. You will be notified once approved.
+  </div>
+
+<% } else if (user.application_status === 'rejected') { %>
+
+  <div class="alert alert-danger">
+    Your application was not approved. Please contact admin.
+  </div>
+
+<% } else if (user.application_status === 'approved' && user.payment_status === 'unpaid') { %>
+
+  <div class="alert alert-info">
+    Your application has been approved. Please complete your payment to activate your membership.
+  </div>
+
+  <a href="/membership/pay" class="btn btn-success">
+    Pay Membership Fee
+  </a>
+
+<% } else if (user.membership_status === 'active') { %>
+
+  <div class="alert alert-success mt-3">
+    Your membership is active
+  </div>
+
+<% } %>
   </div>
 
 </div>

@@ -1,10 +1,10 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm shadow-sm fixed-top">
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm fixed-top">
   <div class="container">
 
     <!-- Brand -->
     <a class="navbar-brand d-flex align-items-center" href="/">
-  <img src="/images/logo.png" alt="Logo" class="navbar-logo">
-</a>
+      <img src="/images/logo.png" alt="Logo" class="navbar-logo">
+    </a>
 
     <!-- Toggler -->
     <button class="navbar-toggler" type="button"
@@ -19,36 +19,157 @@
     <!-- Collapsible Menu -->
     <div class="collapse navbar-collapse" id="navbarNav">
 
-      <!-- Left Menu -->
+      <!-- LEFT MENU -->
       <ul class="navbar-nav me-auto">
 
         <li class="nav-item">
           <a class="nav-link" href="/">Home</a>
         </li>
 
-        <li class="nav-item">
-          <a class="nav-link" href="/about">About</a>
+        <!-- ABOUT (MEGA MENU) -->
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
+            About
+          </a>
+
+          <div class="dropdown-menu mega-menu shadow border-0 p-4">
+
+            <div class="row">
+
+              <!-- ORGANIZATION -->
+              <div class="col-md-4">
+                <h6 class="fw-bold text-success">Organization</h6>
+                <a class="dropdown-item" href="/about">About Us</a>
+                <a class="dropdown-item" href="/history">History</a>
+                <a class="dropdown-item" href="/mission-vision">Mission & Vision</a>
+                <a class="dropdown-item" href="/constitution">Constitution & Byelaws</a>
+              </div>
+
+              <!-- LEADERSHIP -->
+              <div class="col-md-4">
+                <h6 class="fw-bold text-success">Leadership</h6>
+                <a class="dropdown-item" href="/executives">Executives</a>
+                <a class="dropdown-item" href="/past-presidents">Past Executives</a>
+              </div>
+
+              <!-- RECOGNITION -->
+              <div class="col-md-4">
+                <h6 class="fw-bold text-success">Recognition</h6>
+                <a class="dropdown-item" href="/awards">Awards & Achievements</a>
+                <a class="dropdown-item" href="/certifications">Certifications</a>
+              </div>
+
+            </div>
+
+          </div>
         </li>
 
+       <li class="nav-item dropdown">
+  <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
+    Membership
+  </a>
+
+  <div class="dropdown-menu mega-menu shadow border-0 p-4">
+
+    <div class="row">
+
+      <!-- JOIN US -->
+      <div class="col-md-4">
+        <h6 class="fw-bold text-success">Join Us</h6>
+        <a class="dropdown-item" href="/register">Become a Member</a>
+        <a class="dropdown-item" href="/membership">Member Benefits</a>
+        <a class="dropdown-item" href="/faq">Membership FAQ</a>
+        <a class="dropdown-item" href="/fellowship">Fellowship</a>
+        <a class="dropdown-item" href="/fellowship-guide">How to Become a Fellow</a>
+      </div>
+
+      <!-- RESOURCES -->
+      <div class="col-md-4">
+        <h6 class="fw-bold text-success">Member Resources</h6>
+        <a class="dropdown-item" href="/directory">Member Directory</a>
+        <a class="dropdown-item" href="/events">Member Events</a>
+        <a class="dropdown-item" href="/careers">Career Center</a>
+      </div>
+
+      <!-- ENGAGEMENT -->
+      <div class="col-md-4">
+        <h6 class="fw-bold text-success">Engagement</h6>
+        <a class="dropdown-item" href="/partnerships">Partnerships</a>
+        <a class="dropdown-item" href="/volunteer">Volunteer</a>
+      </div>
+
+    </div>
+
+  </div>
+</li>
         <li class="nav-item">
-          <a class="nav-link" href="/membership">Membership</a>
+          <a class="nav-link" href="/news-events">News & Events</a>
         </li>
-
-        <li class="nav-item">
-  <a class="nav-link" href="/news-events">News & Events</a>
-</li>
-
-<li class="nav-item">
-  <a class="nav-link" href="/past-presidents">Past Presidents</a>
-</li>
 
         <li class="nav-item">
           <a class="nav-link" href="/journals">Journals</a>
         </li>
 
-        <li class="nav-item">
-  <a class="nav-link" href="/agc">AGC</a>
+        <li class="nav-item dropdown position-static">
+  <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
+    Initiatives
+  </a>
+
+  <div class="dropdown-menu mega-menu p-4 border-0 shadow">
+    <div class="row">
+
+      <!-- COMMUNITY -->
+      <div class="col-md-4">
+        <h6 class="fw-bold text-success">Community Projects</h6>
+        <a class="dropdown-item" href="/rural-electrification">Rural Electrification</a>
+        <a class="dropdown-item" href="/sustainable-projects">Sustainable Projects</a>
+        <a class="dropdown-item" href="/solar-schools">Solar for Schools</a>
+      </div>
+
+      <!-- CAPACITY -->
+      <div class="col-md-4">
+        <h6 class="fw-bold text-success">Capacity Building</h6>
+        <a class="dropdown-item" href="/training">Training Programs</a>
+        <a class="dropdown-item" href="/workshops">Workshops</a>
+      </div>
+
+      <!-- ADVOCACY -->
+      <div class="col-md-4">
+        <h6 class="fw-bold text-success">Advocacy</h6>
+        <a class="dropdown-item" href="/policy">Policy Advocacy</a>
+        <a class="dropdown-item" href="/research">Research & Development</a>
+        <a class="dropdown-item" href="/international">International Collaboration</a>
+      </div>
+
+    </div>
+  </div>
 </li>
+
+<li class="nav-item dropdown position-static">
+  <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
+    Engagement
+  </a>
+
+  <div class="dropdown-menu mega-menu p-4 border-0 shadow">
+    <div class="row">
+
+      <div class="col-md-6">
+        <h6 class="fw-bold text-success">Support Us</h6>
+        <a class="dropdown-item" href="/donate">Donate</a>
+      </div>
+
+      <div class="col-md-6">
+        <h6 class="fw-bold text-success">Collaborate</h6>
+        <a class="dropdown-item" href="/partnerships">Partnerships</a>
+      </div>
+
+    </div>
+  </div>
+</li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="/agc">AGC</a>
+        </li>
 
         <li class="nav-item">
           <a class="nav-link" href="/contact">Contact</a>
@@ -56,14 +177,14 @@
 
       </ul>
 
-      <!-- Right Menu -->
+      <!-- RIGHT MENU -->
       <ul class="navbar-nav">
 
         <% if (user) { %>
 
           <% if (user.role === 'admin') { %>
             <li class="nav-item">
-              <a class="nav-link" href="/admin/journals">Admin</a>
+              <a class="nav-link" href="/admin/dashboard">Admin</a>
             </li>
           <% } else { %>
             <li class="nav-item">
@@ -92,3 +213,5 @@
     </div>
   </div>
 </nav>
+
+<div class="menu-backdrop" id="menuBackdrop"></div>

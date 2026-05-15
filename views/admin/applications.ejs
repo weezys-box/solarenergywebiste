@@ -1,0 +1,79 @@
+<section class="container py-5">
+  <h2 class="mb-4">Pending Applications</h2>
+
+  <table class="table table-bordered">
+    <thead>
+  <tr>
+    <th>Name</th>
+    <th>Email</th>
+    <th>Photo</th>
+    <th>Profession</th>
+    <th>Bio</th>
+    <th>Category</th>
+    <th>CV</th>
+    <th>Action</th>
+  </tr>
+</thead>
+
+    <tbody>
+  <% users.forEach(user => { %>
+    <tr>
+
+      <td><%= user.full_name %></td>
+      <td><%= user.email %></td>
+
+      <!-- Passport Photo -->
+      <td>
+        <% if (user.passport_photo) { %>
+          <img 
+            src="/uploads/cv/<%= user.passport_photo %>" 
+            width="50" 
+            height="50" 
+            style="object-fit: cover; border-radius: 50%;">
+        <% } else { %>
+          N/A
+        <% } %>
+      </td>
+
+      <!-- Profession -->
+      <td><%= user.profession || 'N/A' %></td>
+
+      <!-- Bio -->
+      <td title="<%= user.bio %>">
+        <%= user.bio ? user.bio.substring(0, 40) + '...' : 'N/A' %>
+      </td>
+
+      <!-- Category -->
+      <td><%= user.membership_category || 'N/A' %></td>
+
+      <!-- CV -->
+      <td>
+        <% if (user.cv_file) { %>
+          <a href="/uploads/cv/<%= user.cv_file %>" target="_blank" class="btn btn-sm btn-primary">
+            View CV
+          </a>
+        <% } else { %>
+          N/A
+        <% } %>
+      </td>
+
+      <!-- ACTIONS -->
+      <td>
+        <form action="/admin/approve/<%= user.id %>" method="POST" style="display:inline;">
+          <button onclick="return confirm('Approve this application?')" class="btn btn-success btn-sm">
+            Approve
+          </button>
+        </form>
+
+        <form action="/admin/reject/<%= user.id %>" method="POST" style="display:inline;">
+          <button onclick="return confirm('Reject this application?')" class="btn btn-danger btn-sm">
+            Reject
+          </button>
+        </form>
+      </td>
+
+    </tr>
+  <% }) %>
+</tbody>
+  </table>
+</section>

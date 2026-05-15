@@ -1,0 +1,41 @@
+<div class="container py-5">
+
+  <h2 class="mb-4">All Members</h2>
+
+  <table class="table table-bordered table-striped">
+
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Category</th>
+        <th>Status</th>
+        <th>Expiry</th>
+      </tr>
+    </thead>
+
+    <tbody>
+
+      <% members.forEach(m => { %>
+        <tr>
+          <td><%= m.full_name %></td>
+          <td><%= m.email %></td>
+          <td><%= m.membership_category || 'N/A' %></td>
+          <td>
+            <% if (m.membership_status === 'active') { %>
+              <span class="badge bg-success">Active</span>
+            <% } else { %>
+              <span class="badge bg-secondary">Inactive</span>
+            <% } %>
+          </td>
+          <td>
+            <%= m.membership_expiry ? new Date(m.membership_expiry).toDateString() : 'N/A' %>
+          </td>
+        </tr>
+      <% }) %>
+
+    </tbody>
+
+  </table>
+
+</div>

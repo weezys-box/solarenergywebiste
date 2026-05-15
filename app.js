@@ -4,7 +4,9 @@ const path = require('path');
 const session = require('express-session');
 const flash = require('connect-flash');
 const expressLayouts = require('express-ejs-layouts');
+require('dotenv').config();
 const axios = require('axios');
+const sendEmail = require('./utils/mailer');
 require('dotenv').config();
 const nodemailer = require('nodemailer');
 const transporter = nodemailer.createTransport({
@@ -116,6 +118,29 @@ app.get('/membership', (req, res) => {
   res.render('pages/membership', { title: 'Membership' });
 });
 
+app.get('/history', (req, res) => {
+  res.render('pages/history', {
+    title: 'History'
+  });
+});
+
+app.get('/mission-vision', (req, res) => {
+  res.render('pages/mission-vision', {
+    title: 'Mission & Vision'
+  });
+});
+
+app.get('/constitution', (req, res) => {
+  res.render('pages/constitution', {
+    title: 'Constitution & Byelaws'
+  });
+});
+
+app.get('/executives', (req, res) => {
+  res.render('pages/executives', {
+    title: 'Executives'
+  });
+});
 
 // =======================
 // NEWS ROUTES
@@ -314,7 +339,11 @@ app.get('/membership/verify', async (req, res) => {
       expiry.setFullYear(expiry.getFullYear() + 1);
 
       db.query(
-        'UPDATE users SET membership_status = "active", membership_expiry = ? WHERE id = ?',
+        `UPDATE users 
+         SET membership_status = "active", 
+             payment_status = "paid", 
+             membership_expiry = ? 
+         WHERE id = ?`,
         [expiry, req.session.user.id],
         (err) => {
 
@@ -322,6 +351,7 @@ app.get('/membership/verify', async (req, res) => {
 
           // update session
           req.session.user.membership_status = 'active';
+          req.session.user.payment_status = 'paid';   // ✅ THIS FIXES YOUR ISSUE
           req.session.user.membership_expiry = expiry;
 
           req.flash('success_msg', 'Membership payment successful!');
@@ -678,6 +708,181 @@ app.post('/admin/presidents/delete/:id', ensureAdmin, (req, res) => {
   );
 });
 
+app.post('/contact', async (req, res) => {
+  const { name, email, message } = req.body;
+
+  try {
+    await transporter.sendMail({
+      from: process.env.EMAIL_USER,
+      to: process.env.EMAIL_USER, // sends to you
+      subject: 'New Contact Message',
+      html: `
+        <h3>New Message</h3>
+        <p><strong>Name:</strong> ${name}</p>
+        <p><strong>Email:</strong> ${email}</p>
+        <p>${message}</p>
+      `
+    });
+
+    req.flash('success_msg', 'Message sent successfully!');
+    res.redirect('/contact');
+
+  } catch (err) {
+    console.error(err);
+    req.flash('error_msg', 'Failed to send message');
+    res.redirect('/contact');
+  }
+});
+
+app.get('/admin/members', ensureAdmin, (req, res) => {
+    console.log('MEMBERS ROUTE HIT');
+  db.query('SELECT * FROM users ORDER BY created_at DESC', (err, results) => {
+    if (err) throw err;
+
+    res.render('admin/members', {
+      title: 'All Members',
+      members: results
+    });
+  });
+});
+
+app.get('/history', (req, res) => {
+  res.render('pages/history', { title: 'History' });
+});
+
+app.get('/mission-vision', (req, res) => {
+  res.render('pages/mission-vision', { title: 'Mission & Vision' });
+});
+
+app.get('/constitution', (req, res) => {
+  res.render('pages/constitution', { title: 'Constitution & Byelaws' });
+});
+
+app.get('/executives', (req, res) => {
+  res.render('pages/executives', { title: 'Executives' });
+});
+
+app.get('/faq', (req, res) => res.render('pages/faq', { title: 'Membership FAQ' }));
+app.get('/fellowship', (req, res) => res.render('pages/fellowship', { title: 'Fellowship' }));
+app.get('/fellowship-guide', (req, res) => res.render('pages/fellowship-guide', { title: 'How to Become a Fellow' }));
+
+app.get('/directory', (req, res) => res.render('pages/directory', { title: 'Member Directory' }));
+app.get('/events', (req, res) => res.render('pages/events', { title: 'Member Events' }));
+app.get('/careers', (req, res) => res.render('pages/careers', { title: 'Career Center' }));
+
+app.get('/partnerships', (req, res) => res.render('pages/partnerships', { title: 'Partnerships' }));
+app.get('/volunteer', (req, res) => res.render('pages/volunteer', { title: 'Volunteer' }));
+
+
+
+app.get('/admin/applications', ensureAdmin, (req, res) => {
+  db.query(
+    'SELECT * FROM users WHERE application_status = "pending"',
+    (err, results) => {
+      if (err) throw err;
+
+      res.render('admin/applications', {
+        title: 'Applications',
+        users: results
+      });
+    }
+  );
+});
+
+app.post('/admin/approve/:id', ensureAdmin, (req, res) => {
+  const userId = req.params.id;
+
+  // First get user details (we need email + name)
+  db.query('SELECT * FROM users WHERE id = ?', [userId], (err, results) => {
+    if (err) throw err;
+
+    const user = results[0];
+
+    db.query(
+      'UPDATE users SET application_status = "approved" WHERE id = ?',
+      [userId],
+      async (err) => {
+        if (err) throw err;
+
+        // ✅ Send approval email
+        try {
+          await sendEmail(
+            user.email,
+            'Application Approved',
+            `
+              <h3>Congratulations ${user.full_name},</h3>
+              <p>Your membership application has been approved.</p>
+              <p>Please log in to complete your membership payment.</p>
+            `
+          );
+        } catch (emailErr) {
+          console.error('Email failed:', emailErr.message);
+        }
+
+        res.redirect('/admin/applications');
+      }
+    );
+  });
+});
+
+app.post('/admin/reject/:id', ensureAdmin, (req, res) => {
+  const userId = req.params.id;
+
+  db.query('SELECT * FROM users WHERE id = ?', [userId], (err, results) => {
+    if (err) throw err;
+
+    const user = results[0];
+
+    db.query(
+      'UPDATE users SET application_status = "rejected" WHERE id = ?',
+      [userId],
+      async (err) => {
+        if (err) throw err;
+
+        // ❌ Send rejection email
+        try {
+          await sendEmail(
+            user.email,
+            'Application Update',
+            `
+              <h3>Hello ${user.full_name},</h3>
+              <p>We regret to inform you that your membership application was not approved.</p>
+              <p>You may contact us for further clarification.</p>
+            `
+          );
+        } catch (emailErr) {
+          console.error('Email failed:', emailErr.message);
+        }
+
+        res.redirect('/admin/applications');
+      }
+    );
+  });
+});
+
+app.get('/rural-electrification', (req, res) => {
+  res.render('pages/rural', { title: 'Rural Electrification' });
+});
+
+app.get('/solar-schools', (req, res) => {
+  res.render('pages/solar-schools', { title: 'Solar for Schools' });
+});
+
+app.get('/training', (req, res) => {
+  res.render('pages/training', { title: 'Training Programs' });
+});
+
+app.get('/policy', (req, res) => {
+  res.render('pages/policy', { title: 'Policy Advocacy' });
+});
+
+app.get('/donate', (req, res) => {
+  res.render('pages/donate', { title: 'Donate' });
+});
+
+app.get('/partnerships', (req, res) => {
+  res.render('pages/partnerships', { title: 'Partnerships' });
+});
 // =======================
 // OTHER ROUTES
 // =======================
